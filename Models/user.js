@@ -25,6 +25,9 @@ const userSchema =  new mongoose.Schema({
         type: String,
         required: true
     },
+    flightBooked : {
+        type : mongoose.Schema.Types.ObjectId
+    }
 },
 {
     timestamps: true

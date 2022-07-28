@@ -44,7 +44,11 @@ router.post("/login", async(req,res) => {
     }
     
     const token = authFile.genToken(user._id);
-    return res.send(token);
+    // return res.send(token);
+    return res.send({
+        Message : "You have Successfully Logged In",
+        Token : token
+    });
 });
 
 //user update
@@ -75,7 +79,10 @@ router.post("/updateuser", async(req,res) =>{
         runValidators: true
     });
 
-    return res.send(updateUser);
+    return res.send({
+        Message: "User Info has been Updated",
+        updatedInfo : updateUser
+    });
 });
 
 //user delete
@@ -85,6 +92,7 @@ router.post("/deleteuser", async(req,res) =>{
     return res.send("An User is Successfully Deleted");
 });
 
+
             //FOR FLIGHT MODEL
 //create a new flight info 
 router.post("/flight", async(req,res) =>{
@@ -92,8 +100,8 @@ router.post("/flight", async(req,res) =>{
         airline : req.body.airline,
         flightName : req.body.flightName,
         flightNo : req.body.flightNo,
-        destinationTo : req.body.destinationTo,
-        destinationFrom : req.body.destinationFrom
+        destinationFrom : req.body.destinationFrom,
+        destinationTo : req.body.destinationTo
     });
     return res.send("A New Flight Option has been Created");
 });
@@ -102,7 +110,43 @@ router.post("/flight", async(req,res) =>{
 router.post("/deleteflight", async(req,res) =>{
     const id = req.body.id;
     await Flight.findByIdAndDelete(id);
-    return res.send("A Flight Option is Successfully Deleted");
+    return res.send("The Flight Option is Successfully Deleted");
+});
+
+//find a flight by id
+router.get("/findbyid", async(req,res) =>{
+    const id = req.body.id;
+    const flight = await Flight.findById(id);
+    return res.send(flight);
+});
+
+//finding flight by params
+router.get("/findbyid/:id", async(req,res) =>{
+    const id = req.params.id;  //to assess params
+    const flight = await Flight.findById(id);
+    return res.send(flight);
+});
+
+//book a flight
+router.post("/bookflight",authFile.authChecker,async(req,res) =>{
+    const userid = req.body.id;
+    const flightid = req.params.id;
+
+    const updateUser = await User.findByIdAndUpdate(
+        userid,
+        {
+            flightBooked: flightid
+        },
+        {
+            new: true,
+            runValidators: true 
+        }
+    );
+    
+    return res.send({
+        Message: "Flight has been Booked Successfully",
+        Update: updateUser
+    });
 });
 
 module.exports = router;
