@@ -3,7 +3,7 @@ const logger = require("morgan");
 const app = express();
 const PORT = 4000;
 const dbConfig = require("./Services/dbConfig");
-const router = require("./Routes/index");
+const router = require("./Routes/index"); // to add more routes same process as it
 
 app.use(logger("dev"));
 app.use(express.json({ limit: "50mb"}));
