@@ -1,0 +1,1 @@
+Home -> login -> signup -> all movies -> About Us -> Header -> Footer -> Movie Detail || Booking -> All user booked movies
