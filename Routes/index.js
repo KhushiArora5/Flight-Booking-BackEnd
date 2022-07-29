@@ -57,21 +57,6 @@ router.post("/updateuser", async(req,res) =>{
     const updateUser = await User.findByIdAndUpdate(
     id,
     {
-        firstname : req.body.firstname 
-    },
-    {
-        middlename : req.body.middlename
-    },
-    {
-        lastname : req.body.lastname
-    },
-    {
-        phoneno : req.body.phoneno
-    },
-    {
-        useremail : req.body.useremail
-    },
-    {
         password : req.body.password
     },
     {
@@ -128,7 +113,7 @@ router.get("/findbyid/:id", async(req,res) =>{
 });
 
 //book a flight
-router.post("/bookflight",authFile.authChecker,async(req,res) =>{
+router.post("/bookflight/:id",async(req,res) =>{
     const userid = req.body.id;
     const flightid = req.params.id;
 
