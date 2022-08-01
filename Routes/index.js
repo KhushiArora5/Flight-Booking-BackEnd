@@ -120,7 +120,8 @@ router.post("/bookflight/:id",async(req,res) =>{
     const updateUser = await User.findByIdAndUpdate(
         userid,
         {
-            flightBooked: flightid
+            $push : {flightBooked: flightid}
+            //$pull : {flightBooked: flightid}
         },
         {
             new: true,

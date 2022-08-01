@@ -25,9 +25,10 @@ const userSchema =  new mongoose.Schema({
         type: String,
         required: true
     },
-    flightBooked : {
-        type : mongoose.Schema.Types.ObjectId
-    }
+    flightBooked : [{
+        // type : mongoose.Schema.Types.ObjectId
+        type: String
+    }]
 },
 {
     timestamps: true
