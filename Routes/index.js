@@ -10,7 +10,7 @@ var salt = bcrypt.genSaltSync(10);
 
                 //ROUTES
 //homepage
-router.get("/", function(req,res){
+router.get("/home", function(req,res){
     return res.send("Welcome");
 });
                 //FOR USER MODEL
@@ -20,7 +20,6 @@ router.post("/signup", async(req,res) => {
     
     await User.create({
         firstname : req.body.firstname, 
-        middlename : req.body.middlename,
         lastname : req.body.lastname,
         phoneno : req.body.phoneno,
         useremail : req.body.useremail,
@@ -34,13 +33,13 @@ router.post("/login", async(req,res) => {
     const user = await User.findOne({useremail: req.body.useremail});
     if(!user)
     {
-        return res.send("An User Not Found");
+        return res.send({mistake:"An User Not Found"});
     }
 
     const check = bcrypt.compareSync(req.body.password, user.password);
     if(!check)
     {
-        return res.send("The Password is Incorrect");
+        return res.send({mistake:"The Password is Incorrect"});
     }
     
     const token = authFile.genToken(user._id);
