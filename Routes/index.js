@@ -134,4 +134,13 @@ router.post("/bookflight/:id",async(req,res) =>{
     });
 });
 
+router.get("/allflights",authFile.authChecker,async(req,res) =>{
+    try {
+        const data = await Flight.find({});
+        return res.send(data);
+    } catch (error) {
+        console.log(error);
+        return res.send(error);
+    }
+});
 module.exports = router;

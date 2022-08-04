@@ -11,11 +11,11 @@ const genToken = (id) =>{
 }
 
 const authChecker = (req,res,next) =>{
-    if(req.header.auth)
+    if(req.headers.auth)
     {
         try
         {
-            const token = req.header.auth;
+            const token = req.headers.auth;
             var decoded = jwt.verify(token,"secret");
             next();
         }
