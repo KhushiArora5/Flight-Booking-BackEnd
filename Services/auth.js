@@ -6,7 +6,7 @@ const genToken = (id) =>{
     },
     'secret',
     {
-        expiresIn: "35d"
+        expiresIn: "185d"
     });
 }
 
