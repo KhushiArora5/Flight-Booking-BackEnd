@@ -1,7 +1,7 @@
 const express = require("express");
 const logger = require("morgan");
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4000;
 const cors = require("cors");
 const dbConfig = require("./Services/dbConfig");
 const router = require("./Routes/index"); // to add more routes same process as it
